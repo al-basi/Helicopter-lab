@@ -1,0 +1,89 @@
+Fixed time step size endret fra 0.002 til 0.01
+
+Duration fra 5K til 500K
+
+Gain på FF 0.5 gain
+
+Travel: Med klokka
+
+e_0 =0.528
+
+0.035 rad = 2 grader
+
+
+T, T_dot, p, p_dot, e, e_dot, Vd, Vs, p_c
+
+TEST 1: 
+Z = 1, W = 1.5 
+poler +- 1.5 
+Kommentar = fløy veldig stabilt. Null disturbance
+
+TEST 1.1 m/(joystick input -> ny ref pc) 
+kommentar: tok min/max i x retning. Pitch reg stabiliserte (fart fart i travel rotasjon. lambda_dot HØY)
+
+
+TEST 2:
+Z= 0, W=1.5 (bare P reg)
+Veldig oversving
+poler = +-1.5i
+
+
+TEST 3:Underdempet
+Z= 0.3 w=2.5
+poler -0.75 +-2.3848i
+Kommentar: stabil ved ingen forstyrrelse. Kpp leddet mye større enn Kpd
+
+
+TEST 4: (standard)
+zeta = 0.7, w = 2.5 
+poler = −1.75±1.79j
+Kommentar = stødig. reagerte mer på Joystick (ved 10sek)
+
+TEST 5: (standard)
+zeta = 0.7, w = 2.5 
+poler = −1.75±1.79j
+Kommentar = med 2 grader step
+
+
+TEST 6: (standard)
+zeta = 0.7, w = 2.5 
+poler = −1.75±1.79j
+Kommentar = med -0.122 step ved 0 (from the start) (Denne var stabil i travel akse) (ish 9.5sek)
+
+TEST 7: (standard)
+zeta = 0.7, w = 2.5 
+poler = −1.75±1.79j
+Kommentar = dytt i pitch ved (ish 9.5sek)
+
+
+TEST 8: 
+zeta = 1.5, w = 2.5 
+poler = −0.96, −6.54
+Kommentar: overdempet. Stabiliserte godt ved forstyrelse
+
+
+TEST 9: 
+zeta = 0,7, w = 6.5 
+poler = −0.96, −6.54
+Kommentar: Aggressiv. Funket fint, men med forstyrrelse så var den aggressiv. Stabiliserte aldri. Vd gikk opp og ned fort (sinus)
+
+
+TEST 10: Ustabil
+zeta =−0.2 w=2.0
+Poler +0.4±1.96j (positiv realdel!)
+Kommenatar: tror den nådde metning i pitch?
+
+
+TEST 11: høy omega iforhold til zeta.
+zeta =0.5 w=10
+Poler -5 +-8.66i
+Kommenatar: Økende svingninger
+
+TEST 12:
+
+
+
+
+
+
+
