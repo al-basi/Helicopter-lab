@@ -1,0 +1,34 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.ilg
+*.idx
+*.ind
+*.glg
+*.glo
+*.ist
+*.maf
+*.mtc
+*.mtc0
+*.run.xml
+
+# Optional: (uncomment if you want to ignore PDF files. I recommend if you are making a lot of small changes. Just uncomment on the last commit)
+# *.pdf
+
+# Keep the source files tracked
+!*.tex
+!*.bib
+!*.sty
