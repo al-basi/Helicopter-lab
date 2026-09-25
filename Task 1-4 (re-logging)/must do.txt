@@ -1,0 +1,15 @@
+To der er to helt forskjellige innstillinger, og kombinasjonen dere har nå gir sannsynligvis noe dere ikke vil ha.
+
+**Regnestykket:**
+- Original: Ts = 0.002s, Duration = 5000 (samples) → total loggetid = 5000 × 0.002 = 10s. Det stemmer med de 10 sekundene fra oppgaveteksten, så "Duration" er antall samples, ikke sekunder.
+- Nytt: Ts = 0.01s, Duration = 500000 → total loggetid = 500000 × 0.01 = 5000 sekunder ≈ 83 minutter.
+
+Det er nesten helt sikkert ikke det dere ønsket.
+
+**To problemer med det dere gjorde:**
+
+1. **Duration ble satt altfor høyt.** Duration er antall samples, ikke sekunder, så den skal regnes ut fra ønsket tid delt på tidssteget, ikke bare skrus opp til et stort tall.
+
+2. **Fixed time step size bør dere egentlig ikke røre.** Den er satt til 0.002s fordi det er samme Ts dere brukte til å diskretisere systemet (Ad, Bd, Cd) i forberedelsen til del 3/4 (Luenberger/Kalman). Endrer dere den globalt her, blir den diskretiseringen feil senere i lab-en, med mindre dere husker å endre den tilbake før dere kommer dit.
+
+**Anbefaling:** sett Fixed time step size tilbake til 0.002, og juster kun Duration for å få ønsket lengde, f.eks. for 30 sekunder: Duration = 30 / 0.002 = 15000.
