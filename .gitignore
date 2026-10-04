@@ -32,3 +32,10 @@
 !*.tex
 !*.bib
 !*.sty
+
+# Simulink/MATLAB build and cache artifacts
+*.slxc
+*.autosave
+*.rt-win64
+*_quarc_win64/
+slprj/

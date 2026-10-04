@@ -7,9 +7,9 @@
  *
  * Code generation for model "heli_q8".
  *
- * Model version              : 11.5
+ * Model version              : 11.7
  * Simulink Coder version : 9.4 (R2020b) 29-Jul-2020
- * C source code generated on : Mon Sep 21 16:29:37 2026
+ * C source code generated on : Sat Oct  3 20:24:13 2026
  *
  * Target selection: quarc_win64.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -24,41 +24,70 @@
 /* Block parameters (default storage) */
 P_heli_q8_T heli_q8_P = {
   /* Variable: F
-   * Referenced by: '<S4>/F*r'
+   * Referenced by: '<S5>/F*r'
    */
   { 2.563359780193927E-16, 2.7463178393732308, 4.7905147531771295,
     3.206883936086547E-16 },
 
   /* Variable: Joystick_gain_x
-   * Referenced by: '<S3>/Joystick_gain_x'
+   * Referenced by: '<S4>/Joystick_gain_x'
    */
   1.0,
 
   /* Variable: Joystick_gain_y
-   * Referenced by: '<S3>/Joystick_gain_y'
+   * Referenced by: '<S4>/Joystick_gain_y'
    */
   -1.0,
 
   /* Variable: K
-   * Referenced by: '<S4>/K*u'
+   * Referenced by: '<S5>/K*x'
    */
   { 2.563359780193927E-16, 2.7463178393732308, 6.7722662722697749E-16,
     3.2711308374298205, 4.7905147531771295, 3.206883936086547E-16,
     -4.114709071755008E-17, -1.0000000000000038, -1.0000000000000002,
     -1.7204652407624638E-16 },
 
-  /* Variable: V_s0
+  /* Variable: P
+   * Referenced by:
+   *   '<S6>/First'
+   *   '<S6>/Second'
+   */
+  0.175,
+
+  /* Variable: Vs_0
    * Referenced by: '<Root>/Constant'
    */
   7.0,
 
   /* Variable: e_0
-   * Referenced by: '<Root>/Constant1'
+   * Referenced by:
+   *   '<Root>/Constant1'
+   *   '<S8>/Integrator1'
    */
   0.528,
 
+  /* Variable: sw_ecdot
+   * Referenced by: '<S7>/Constant3'
+   */
+  2.0,
+
+  /* Variable: sw_pc
+   * Referenced by: '<S7>/Constant2'
+   */
+  2.0,
+
+  /* Variable: t1
+   * Referenced by: '<S6>/First'
+   */
+  20.0,
+
+  /* Variable: t2
+   * Referenced by: '<S6>/Second'
+   */
+  23.0,
+
   /* Mask Parameter: HILWriteAnalog_channels
-   * Referenced by: '<S2>/HIL Write Analog'
+   * Referenced by: '<S3>/HIL Write Analog'
    */
   { 0U, 1U },
 
@@ -148,112 +177,122 @@ P_heli_q8_T heli_q8_P = {
   0.0,
 
   /* Expression: 2*pi/8192
-   * Referenced by: '<S2>/Travel: Count to rad'
+   * Referenced by: '<S3>/Travel: Count to rad'
    */
   0.00076699039394282058,
 
   /* Computed Parameter: TravelTransferFcn_A
-   * Referenced by: '<S2>/Travel: Transfer Fcn'
+   * Referenced by: '<S3>/Travel: Transfer Fcn'
    */
   -50.0,
 
   /* Computed Parameter: TravelTransferFcn_C
-   * Referenced by: '<S2>/Travel: Transfer Fcn'
+   * Referenced by: '<S3>/Travel: Transfer Fcn'
    */
   -2500.0,
 
   /* Computed Parameter: TravelTransferFcn_D
-   * Referenced by: '<S2>/Travel: Transfer Fcn'
+   * Referenced by: '<S3>/Travel: Transfer Fcn'
    */
   50.0,
 
   /* Expression: -2*pi /4096
-   * Referenced by: '<S2>/Pitch: Count to rad'
+   * Referenced by: '<S3>/Pitch: Count to rad'
    */
   -0.0015339807878856412,
 
   /* Computed Parameter: PitchTransferFcn_A
-   * Referenced by: '<S2>/Pitch: Transfer Fcn'
+   * Referenced by: '<S3>/Pitch: Transfer Fcn'
    */
   -50.0,
 
   /* Computed Parameter: PitchTransferFcn_C
-   * Referenced by: '<S2>/Pitch: Transfer Fcn'
+   * Referenced by: '<S3>/Pitch: Transfer Fcn'
    */
   -2500.0,
 
   /* Computed Parameter: PitchTransferFcn_D
-   * Referenced by: '<S2>/Pitch: Transfer Fcn'
+   * Referenced by: '<S3>/Pitch: Transfer Fcn'
    */
   50.0,
 
   /* Expression: -2 * pi /4096
-   * Referenced by: '<S2>/Elevation: Count to rad'
+   * Referenced by: '<S3>/Elevation: Count to rad'
    */
   -0.0015339807878856412,
 
   /* Computed Parameter: ElevationTransferFcn_A
-   * Referenced by: '<S2>/Elevation: Transfer Fcn'
+   * Referenced by: '<S3>/Elevation: Transfer Fcn'
    */
   -50.0,
 
   /* Computed Parameter: ElevationTransferFcn_C
-   * Referenced by: '<S2>/Elevation: Transfer Fcn'
+   * Referenced by: '<S3>/Elevation: Transfer Fcn'
    */
   -2500.0,
 
   /* Computed Parameter: ElevationTransferFcn_D
-   * Referenced by: '<S2>/Elevation: Transfer Fcn'
+   * Referenced by: '<S3>/Elevation: Transfer Fcn'
    */
   50.0,
 
   /* Expression: 0
-   * Referenced by: '<S3>/Rate Transition: x'
+   * Referenced by: '<S4>/Rate Transition: x'
    */
   0.0,
 
   /* Expression: -0.1
-   * Referenced by: '<S3>/Dead Zone: x'
+   * Referenced by: '<S4>/Dead Zone: x'
    */
   -0.1,
 
   /* Expression: 0.1
-   * Referenced by: '<S3>/Dead Zone: x'
+   * Referenced by: '<S4>/Dead Zone: x'
    */
   0.1,
 
   /* Expression: 10/9
-   * Referenced by: '<S3>/Gain: x'
+   * Referenced by: '<S4>/Gain: x'
    */
   1.1111111111111112,
 
   /* Expression: 0
-   * Referenced by: '<S3>/Rate Transition: y'
+   * Referenced by: '<S6>/First'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<S6>/Second'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<S7>/Constant'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<S4>/Rate Transition: y'
    */
   0.0,
 
   /* Expression: -0.1
-   * Referenced by: '<S3>/Dead Zone: y'
+   * Referenced by: '<S4>/Dead Zone: y'
    */
   -0.1,
 
   /* Expression: 0.1
-   * Referenced by: '<S3>/Dead Zone: y'
+   * Referenced by: '<S4>/Dead Zone: y'
    */
   0.1,
 
   /* Expression: 10/9
-   * Referenced by: '<S3>/Gain: y'
+   * Referenced by: '<S4>/Gain: y'
    */
   1.1111111111111112,
 
   /* Expression: 0
-   * Referenced by: '<S4>/Integrator'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S4>/Integrator1'
+   * Referenced by: '<S8>/Integrator'
    */
   0.0,
 
@@ -268,22 +307,22 @@ P_heli_q8_T heli_q8_P = {
   0.5,
 
   /* Expression: 5
-   * Referenced by: '<S2>/Front motor: Saturation'
+   * Referenced by: '<S3>/Front motor: Saturation'
    */
   5.0,
 
   /* Expression: -5
-   * Referenced by: '<S2>/Front motor: Saturation'
+   * Referenced by: '<S3>/Front motor: Saturation'
    */
   -5.0,
 
   /* Expression: 5
-   * Referenced by: '<S2>/Back motor: Saturation'
+   * Referenced by: '<S3>/Back motor: Saturation'
    */
   5.0,
 
   /* Expression: -5
-   * Referenced by: '<S2>/Back motor: Saturation'
+   * Referenced by: '<S3>/Back motor: Saturation'
    */
   -5.0,
 
@@ -323,7 +362,7 @@ P_heli_q8_T heli_q8_P = {
   1,
 
   /* Computed Parameter: HILReadEncoderTimebase_Clock
-   * Referenced by: '<S2>/HIL Read Encoder Timebase'
+   * Referenced by: '<S3>/HIL Read Encoder Timebase'
    */
   0,
 
@@ -353,17 +392,17 @@ P_heli_q8_T heli_q8_P = {
   { 0U, 1U, 2U, 3U, 4U, 5U, 6U, 7U },
 
   /* Computed Parameter: HILReadEncoderTimebase_Channels
-   * Referenced by: '<S2>/HIL Read Encoder Timebase'
+   * Referenced by: '<S3>/HIL Read Encoder Timebase'
    */
   { 0U, 1U, 2U },
 
   /* Computed Parameter: HILReadEncoderTimebase_SamplesI
-   * Referenced by: '<S2>/HIL Read Encoder Timebase'
+   * Referenced by: '<S3>/HIL Read Encoder Timebase'
    */
   500U,
 
   /* Computed Parameter: GameController_BufferSize
-   * Referenced by: '<S3>/Game Controller'
+   * Referenced by: '<S4>/Game Controller'
    */
   12U,
 
@@ -543,32 +582,32 @@ P_heli_q8_T heli_q8_P = {
   1,
 
   /* Computed Parameter: HILReadEncoderTimebase_Active
-   * Referenced by: '<S2>/HIL Read Encoder Timebase'
+   * Referenced by: '<S3>/HIL Read Encoder Timebase'
    */
   1,
 
   /* Computed Parameter: HILWriteAnalog_Active
-   * Referenced by: '<S2>/HIL Write Analog'
+   * Referenced by: '<S3>/HIL Write Analog'
    */
   0,
 
   /* Computed Parameter: GameController_AutoCenter
-   * Referenced by: '<S3>/Game Controller'
+   * Referenced by: '<S4>/Game Controller'
    */
   0,
 
   /* Computed Parameter: GameController_Enabled
-   * Referenced by: '<S3>/Game Controller'
+   * Referenced by: '<S4>/Game Controller'
    */
   1,
 
   /* Computed Parameter: HILReadEncoderTimebase_Overflow
-   * Referenced by: '<S2>/HIL Read Encoder Timebase'
+   * Referenced by: '<S3>/HIL Read Encoder Timebase'
    */
   1U,
 
   /* Computed Parameter: GameController_ControllerNumber
-   * Referenced by: '<S3>/Game Controller'
+   * Referenced by: '<S4>/Game Controller'
    */
   1U
 };

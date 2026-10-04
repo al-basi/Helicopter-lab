@@ -16,7 +16,20 @@
 Joystick_gain_x = 1;
 Joystick_gain_y = -1;
 
-p_step = -0.175 * 5;    % 10 grader. Stort steg er 20 grader
+
+%%%%%%%%%%% Reference Switch 
+% 1 = Joystick, 2 = Pulse, 3 = Const (0)
+sw_pc = 2;
+sw_ecdot = 2; 
+
+
+%%%%%%%%%%% Pulse values
+P = 0.175;    % Value
+t1 = 20;       % Start time
+t2 = 23;       % End time
+
+t3 = 24;
+t4 = 26;
 
 
 %%%%%%%%%%% Physical constants
@@ -29,28 +42,27 @@ m_p = 0.72; % Motor mass [kg]
 
 
 %%%%%%%%%%% Moments of inertia [kg m^2]
-J_p     = 2 * m_p * l_p^2;                        % pitch axis
+J_p     = 2 * m_p * l_p^2;                         % pitch axis
 J_e     = m_c * l_c^2 + 2*m_p*l_h^2;               % elevation axis
 J_lamda = m_c * l_c^2 + 2*m_p * (l_h^2 + l_p^2);   % travel axis
 
-%%%%%%%%%%% Equilibrium and linearization constants
-V_s0 = 7;                      % equilibrium sum voltage [V] (measured, Task 2)
-e_0 = 0.528;                   % elevation offset [rad] (measured, Task 2)
-p_0 = -0.122;                  % pitch offset, to minimize travel (measured)
 
+%%%%%%%%%%% Equilibrium constants (measured)
+Vs_0 = 7;              % equilibrium sum voltage [V] (measured, Task 2)
+e_0 = 0.528;           % elevation offset [rad] (measured, Task 2)
+
+
+%%%%%%%%%%% Linearization constants (derived)
 L_2 = g * (m_c * l_c - 2 * m_p * l_h);   % [N m]
-K_f  = -L_2 / (l_h * V_s0);    % motor force constant [N/V]
-L_1 = K_f * l_p;    % [N m/V]
+K_f  = -L_2 / (l_h * Vs_0);              % motor force constant [N/V]
+L_1 = K_f * l_p;                         % [N m/V]
 L_3 = l_h * K_f;
 
-
-K_1 = L_1 / J_p;    % pitch loop gain
+K_1 = L_1 / J_p;                        
 K_2 = L_3 / J_e;
 
-%%%%%%%%%%% 
-test_id = 'TEST';
 
-
+%%%%%%%%%%% IQR
 A = [0, 1, 0, 0, 0;
      0, 0, 0, 0, 0; 
      0, 0, 0, 0, 0;
@@ -64,30 +76,53 @@ B = [0, 0;
      0, 0];
  
 C_ctrl = ctrb(A, B);
-%disp(C_ctrl);
+
+if rank(C_ctrl) < size(A, 1)
+    error('The linearized helicopter model is not controllable.');
+end
 
 
-Q = diag([1, 1, 1, 1, 1]);  %[p, p_dot, e_dot, gamma, zeta_LQI]
-R = diag([1, 1]);           % [Vs_thilde. Vd]
+pole_mode = 0;
 
-[K, S, P] = lqr(A, B, Q, R);
+if pole_mode == 1
+    disp('SELF CHOSEN POLES MODE')
+    poles_des = [1, 3, 3, 2, 5];
+    K = place(A, B, poles_des);
+    poles = eig(A - B*K);
+    
+else
+    Q = diag([1, 1, 1, 1, 1]);  % [p, p_dot, e_dot, gamma, zeta_LQI]
+    R = diag([1, 1]);                % [Vs_thilde, Vd]
+    [K, S, poles] = lqr(A, B, Q, R);
+end
+disp('poles:')
+disp(poles)
+
 F = [K(1,1), K(1,3); K(2,1), K(2,3)];
-
-disp(S)
-
-omega_0 = sqrt(K_1 * K(2,1));
-zeta = K_1 * K(2,2) / (2*omega_0);
-
-fprintf('zeta=%-3f, omega=%.3f\n', zeta, omega_0);
 
 
 %%%%%%% file shit
 data_dir = fullfile(fileparts(mfilename('fullpath')), 'data');
 
+if ~exist(data_dir, 'dir')
+    mkdir(data_dir);
+end
+
+test_id = 'T1_Normal';
+model = 'heli_q8';
+
 data_filename = fullfile(data_dir, [test_id '.mat']);
 reg_filename  = fullfile(data_dir, [test_id '_regulatorverdier.mat']);
 
-save(reg_filename, 'Q', 'R', 'K', 'F', 'zeta', 'omega_0');
+load_system(model);
+set_param([model '/To File'], 'Filename', data_filename);
+set_param([model '/To File'], 'MatrixName', 'heli_log');
 
-%fprintf('\nData will be logged to:\n    %s\n', data_filename);
-%fprintf('Regulator values already saved to:\n    %s\n\n', reg_filename);
+fprintf('\nData will be logged to:\n    %s\n', data_filename);
+fprintf('Regulator values already saved to:\n    %s\n\n', reg_filename);
+
+if pole_mode == 1
+    save(reg_filename, 'K', 'F', 'poles', 'P', 't1', 't2', 't3', 't4');
+else
+    save(reg_filename, 'Q', 'R', 'K', 'F', 'poles', 'P', 't1', 't2');
+end

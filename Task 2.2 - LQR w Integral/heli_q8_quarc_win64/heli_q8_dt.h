@@ -7,9 +7,9 @@
  *
  * Code generation for model "heli_q8".
  *
- * Model version              : 11.5
+ * Model version              : 11.7
  * Simulink Coder version : 9.4 (R2020b) 29-Jul-2020
- * C source code generated on : Mon Sep 21 16:29:37 2026
+ * C source code generated on : Sat Oct  3 20:24:13 2026
  *
  * Target selection: quarc_win64.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -64,7 +64,7 @@ static const char_T * rtDataTypeNames[] = {
 
 /* data type transitions for block I/O structure */
 static DataTypeTransition rtBTransitions[] = {
-  { (char_T *)(&heli_q8_B.TravelCounttorad), 0, 0, 35 }
+  { (char_T *)(&heli_q8_B.TravelCounttorad), 0, 0, 33 }
   ,
 
   { (char_T *)(&heli_q8_DW.HILInitialize_AIMinimums[0]), 0, 0, 68 },
@@ -75,7 +75,7 @@ static DataTypeTransition rtBTransitions[] = {
 
   { (char_T *)(&heli_q8_DW.HILReadEncoderTimebase_Task), 16, 0, 1 },
 
-  { (char_T *)(&heli_q8_DW.Scope_PWORK.LoggedData), 11, 0, 16 },
+  { (char_T *)(&heli_q8_DW.Scope_PWORK.LoggedData), 11, 0, 13 },
 
   { (char_T *)(&heli_q8_DW.HILInitialize_ClockModes[0]), 6, 0, 46 },
 
@@ -92,11 +92,11 @@ static DataTypeTransitionTable rtBTransTable = {
 
 /* data type transitions for Parameters structure */
 static DataTypeTransition rtPTransitions[] = {
-  { (char_T *)(&heli_q8_P.F[0]), 0, 0, 18 },
+  { (char_T *)(&heli_q8_P.F[0]), 0, 0, 23 },
 
   { (char_T *)(&heli_q8_P.HILWriteAnalog_channels[0]), 7, 0, 2 },
 
-  { (char_T *)(&heli_q8_P.HILInitialize_OOTerminate), 0, 0, 45 },
+  { (char_T *)(&heli_q8_P.HILInitialize_OOTerminate), 0, 0, 47 },
 
   { (char_T *)(&heli_q8_P.HILInitialize_CKChannels[0]), 6, 0, 10 },
 
