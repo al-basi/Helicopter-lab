@@ -7,8 +7,8 @@
 
 % Titlepage
 \title{LaTeX Lab Report Template}
-\author{Group 00\\Student 70000\\Student 70001\\Student 70002}
-\date{January 1, 1970}
+\author{Group 00\\Student no. 70000\\Student no. 70001\\Student no. 70002}
+\date{September 13, 2021}
 \begin{titlepage}
     \maketitle
     \begin{figure}
@@ -32,12 +32,12 @@
 % Main content
 \newpage
 \setcounter{page}{1}
-\include{intro}
-\include{part1}
-\include{part2}
-\include{part3}
-\include{conclusion}
-\include{appendix}
+\include{intro_new}
+\include{labday1}
+\include{labday2}
+\include{labday3}
+\include{labday4}
+
 % \input simply inserts the contents of the file, while \include forces a \newpage.
 % See \input vs. \include: http://tex.stackexchange.com/questions/246/when-should-i-use-input-vs-include
 
@@ -46,5 +46,9 @@
 \addcontentsline{toc}{section}{References}
 \printbibliography{}
 \label{sec:bibliography}
+
+
+\include{appendix}
+
 
 \end{document}
